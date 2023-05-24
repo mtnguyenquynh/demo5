@@ -1,4 +1,4 @@
-package com.example.demo3.book;
+package com.example.demo5.book;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,12 +10,12 @@ public class Book {
     private String BookTitle;
     private String AuthorName;
     private Date PublicationDate;
-    private String Version;
+    private int Version;
     private String Genre;
     private double Price;
-    private String Type;
+    private int Type;
 
-    public Book(String id, String title, String author, Date publicationDate, String version, String genre, double price, String type) {
+    public Book(String id, String title, String author, Date publicationDate, int version, String genre, double price, int type) {
         this.ID = id;
         this.BookTitle = title;
         this.AuthorName = author;
@@ -66,11 +66,11 @@ public class Book {
         PublicationDate = publicationDate;
     }
 
-    public String getVersion() {
+    public int getVersion() {
         return Version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(int version) {
         Version = version;
     }
 
@@ -90,11 +90,11 @@ public class Book {
         Price = price;
     }
 
-    public String getType() {
+    public int getType() {
         return Type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         Type = type;
     }
 
@@ -137,7 +137,7 @@ public class Book {
                     setPublicationDate(dateFormat.parse(entry.getValue()));
                     break;
                 case "Version":
-                    setVersion(entry.getValue());
+                    setVersion(Integer.parseInt(entry.getValue()));
                     break;
                 case "Genre":
                     setGenre(entry.getValue());
@@ -146,7 +146,7 @@ public class Book {
                     setPrice(Double.parseDouble(entry.getValue()));
                     break;
                 case "Type":
-                    setType(entry.getValue());
+                    setType(Integer.parseInt(entry.getValue()));
                     break;
                 // Add more cases for additional properties
                 default:

@@ -180,7 +180,7 @@
                     window.addEventListener('load', function() {
                         var form = document.createElement('form');
                         form.method = 'post';
-                        form.action = 'bookServlet1';
+                        form.action = 'cartServlet';
                         var input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = 'action';
@@ -271,9 +271,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
-                    <form method="get" action="addBook.jsp">
-                        <button type="submit">Add</button>
-                    </form><br>
+
                     <!-- Basic Bootstrap Table -->
                     <div class="card">
                         <h5 class="card-header">Table Basic</h5>
@@ -306,14 +304,12 @@
                                     <td><%= book.getPrice() %></td>
                                     <td><%= book.getType() %></td>
                                     <td>
-                                        <form method="post" action="bookServlet1">
-                                            <input type="hidden" name="id" value="<%= book.getId() %>">
-                                            <button type="submit" name="action" value="remove" onclick="return confirm('Are you sure you want to delete this book?')">Delete</button>
+                                        <form method="post" action="cartServlet">
+                                            <input type="hidden" name="cid">
+                                            <input type="hidden" name="bid" value="<%= book.getId()%>">
+                                            <button type="submit" name="action" value="add">Add</button>
                                         </form>
-                                        <form method="get" action="UpdateBook.jsp">
-                                            <input type="hidden" name="id" value="<%= book.getId() %>">
-                                            <button type="submit">Update</button>
-                                        </form>
+
                                     </td>
                                 </tr>
                                 <%   }
@@ -374,7 +370,6 @@
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="assets/js/main.js"></script>
 
 <!-- Page JS -->
 

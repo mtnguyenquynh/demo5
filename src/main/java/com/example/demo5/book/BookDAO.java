@@ -1,7 +1,7 @@
-package com.example.demo3.book;
+package com.example.demo5.book;
 
-import com.example.demo3.connection.ConnectionDB;
-import enumClass.ColumnName;
+import com.example.demo5.connection.ConnectionDB;
+import enumClass.BookColummn;
 
 import java.sql.*;
 import java.sql.Date;
@@ -26,10 +26,10 @@ public class BookDAO {
         statement.setString(2, book.getTitle());
         statement.setString(3, book.getAuthor());
         statement.setDate(4, new java.sql.Date(book.getPublicationDate().getTime()));
-        statement.setString(5, book.getVersion());
+        statement.setInt(5, book.getVersion());
         statement.setString(6, book.getGenre());
         statement.setDouble(7, book.getPrice());
-        statement.setString(8, book.getType());
+        statement.setInt(8, book.getType());
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -51,10 +51,10 @@ public class BookDAO {
             String title = resultSet.getString("BookTitle");
             String author = resultSet.getString("AuthorName");
             Date publicationDate = resultSet.getDate("PublicationDate");
-            String version = resultSet.getString("Version");
+            int version = resultSet.getInt("Version");
             String genre = resultSet.getString("Genre");
             double price = resultSet.getDouble("Price");
-            String type = resultSet.getString("Type");
+            int type = resultSet.getInt("Type");
 
             Book book = new Book(id, title, author, publicationDate, version, genre, price, type);
             listBooks.add(book);
@@ -77,10 +77,10 @@ public class BookDAO {
             statement.setString(1, book.getBookTitle());
             statement.setString(2, book.getAuthorName());
             statement.setDate(3, new java.sql.Date(book.getPublicationDate().getTime()));
-            statement.setString(4, book.getVersion());
+            statement.setInt(4, book.getVersion());
             statement.setString(5, book.getGenre());
             statement.setDouble(6, book.getPrice());
-            statement.setString(7, book.getType());
+            statement.setInt(7, book.getType());
             statement.setString(8, book.getId());
             rowUpdated = statement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -109,7 +109,7 @@ public class BookDAO {
         return rowDeleted;
     }
 
-    public ArrayList<Book> searchBook(ColumnName filter, String value) throws SQLException {
+    public ArrayList<Book> searchBook(BookColummn filter, String value) throws SQLException {
         if (filter == null) {
             throw new IllegalArgumentException("Invalid filter parameter");
         }
@@ -128,10 +128,10 @@ public class BookDAO {
                         rs.getString("BookTitle"),
                         rs.getString("AuthorName"),
                         rs.getDate("PublicationDate"),
-                        rs.getString("Version"),
+                        rs.getInt("Version"),
                         rs.getString("Genre"),
                         rs.getDouble("Price"),
-                        rs.getString("Type"));
+                        rs.getInt("Type"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -164,16 +164,44 @@ public class BookDAO {
             book.setBookTitle(resultSet.getString("bookTitle"));
             book.setAuthorName(resultSet.getString("authorName"));
             book.setPublicationDate(resultSet.getDate("publicationDate"));
-            book.setVersion(resultSet.getString("version"));
+            book.setVersion(resultSet.getInt("version"));
             book.setGenre(resultSet.getString("genre"));
             book.setPrice(resultSet.getDouble("price"));
-            book.setType(resultSet.getString("type"));
+            book.setType(resultSet.getInt("type"));
         }
 
         resultSet.close();
+        return book;
+    }
+
+    public int totalNoCustomer() throws SQLException {
+        String sql = "SELECT COUNT(DISTINCT ID) AS TotalCustomer FROM Customer";
+        connectionDB.connect();
+        Statement statement = connectionDB.getJdbcConnection().createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        int totalCustomer = 0;
+        if(rs.next()){
+            totalCustomer = rs.getInt("TotalCustomer");
+        }
+        rs.close();
         statement.close();
         connectionDB.disconnect();
-        return book;
+        return totalCustomer;
+    }
+
+    public int totalNoBook() throws SQLException {
+        String sql = "SELECT COUNT(DISTINCT ID) AS TotalBooks FROM book";
+        connectionDB.connect();
+        Statement statement = connectionDB.getJdbcConnection().createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        int totalBooks = 0;
+        if(rs.next()){
+            totalBooks = rs.getInt("TotalBooks");
+        }
+        rs.close();
+        statement.close();
+        connectionDB.disconnect();
+        return totalBooks;
     }
 
 }

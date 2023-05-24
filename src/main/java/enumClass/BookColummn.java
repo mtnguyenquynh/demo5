@@ -1,6 +1,6 @@
 package enumClass;
 
-public enum ColumnName {
+public enum BookColummn {
     ID("ID"),
     BOOK_TITLE("BookTitle"),
     AUTHOR_NAME("AuthorName"),
@@ -9,7 +9,7 @@ public enum ColumnName {
 
     private final String columnName;
 
-    private ColumnName(String columnName) {
+    private BookColummn(String columnName) {
         this.columnName = columnName;
     }
 
