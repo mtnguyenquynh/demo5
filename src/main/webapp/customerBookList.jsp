@@ -109,8 +109,9 @@
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Library /</span> Books in store</h4>
                 <div class="card">
                     <div class="table-responsive text-nowrap">
-                            <table class="table">
-                                <form id="bookForm" action="orderServlet" method="POST">
+                        <form id="bookForm" action="orderServlet" method="POST">
+
+                        <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Select</th>
@@ -125,13 +126,16 @@
                                 </tr>
                                 </thead>
                                 <tbody id="bookTableBody"></tbody>
-                                </form>
+                                    <input type="hidden" name="customerId"
+                                           value="<%= session.getAttribute("customerId") %>"/>
+                                    <input type="hidden" name="action" value="saveOrder"/>
+                                    <input type="submit" value="Submit Order"/>
+
 
                             </table>
-                            <input type="hidden" name="customerId"
-                                   value="<%= session.getAttribute("customerId") %>"/>
-                            <input type="hidden" name="action" value="saveOrder"/>
-                            <input type="submit" value="Submit Order"/>
+                        </form>
+
+
                     </div>
                 </div>
 

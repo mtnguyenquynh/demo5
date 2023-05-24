@@ -10,53 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd802cd1-e842-4308-9aff-5bd934e54cd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/OrderServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/BookOrderHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/order/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/order/OrderDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AdminUpdateAccount.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/addCustomer.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/new.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/customerBookList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/orderList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/success.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/viewOrder.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/BookServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/BookServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/BookServlet1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/BookServlet1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/Cart/CartDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/CartServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/CustomerLoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/CustomerLoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/CustomerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/BookPurchaseHistory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/book/TransactionStats.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/connection/ConnectionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/connection/ConnectionDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/customer/CustomarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/customer/CustomarDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/customer/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/customer/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enumClass/BookColummn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enumClass/BookColummn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enumClass/CustomerColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enumClass/CustomerColumn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AdminManagePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AdminManagePage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/BookList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/BookList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/BookList1.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/BookList1.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CustomerList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CustomerList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CustomerList1.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CustomerList1.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CustomerLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CustomerLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CustomerManagePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CustomerManagePage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/PurchaseHistory.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/PurchaseHistory.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/TransactionStats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/TransactionStats.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/UpdateBook.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/UpdateBook.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/addBook.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/addBook.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo5/order/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo5/order/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/customerBookList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/customerBookList.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,6 +222,7 @@
       <workItem from="1684805785914" duration="12259000" />
       <workItem from="1684850104333" duration="14998000" />
       <workItem from="1684893361641" duration="12601000" />
+      <workItem from="1684915569771" duration="3061000" />
     </task>
     <servers />
   </component>

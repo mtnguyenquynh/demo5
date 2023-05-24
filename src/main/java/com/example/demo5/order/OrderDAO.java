@@ -145,24 +145,26 @@ public class OrderDAO {
 
 
     private String generateId(String table) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM " + table;
+        String sql = "SELECT MAX(ID) FROM " + table;
         try (PreparedStatement stmt = connectionDB.getJdbcConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int count = rs.getInt(1);
-                if (count < 50) {
-                    // Generate a new order ID based on the count
-                    return "O" + (count + 1);
+                String maxId = rs.getString(1);
+                if (maxId == null) {
+                    return "O1";
                 } else {
-                    // Maximum order count reached
-                    throw new SQLException("Maximum order count reached.");
+// Extract the numeric part from the maxId by removing the "O" prefix
+                    int numericPart = Integer.parseInt(maxId.substring(1));
+// Increment the numeric part
+                    numericPart++;
+// Concatenate the "O" prefix with the incremented numeric part
+                    return "O" + numericPart;
                 }
             } else {
                 throw new SQLException("Unable to generate ID.");
             }
         }
     }
-
 
 
 
