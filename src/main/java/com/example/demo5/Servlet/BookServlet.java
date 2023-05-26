@@ -1,7 +1,6 @@
-package com.example.demo5;
+package com.example.demo5.Servlet;
 
 import com.example.demo5.book.Book;
-import com.example.demo5.book.BookOrderHistory;
 import com.example.demo5.book.BookDAO;
 import com.example.demo5.connection.ConnectionDB;
 
@@ -20,7 +19,7 @@ import java.util.*;
 
 
 @WebServlet(name = "BookServlet1", urlPatterns = {"/bookServlet1"})
-public class BookServlet1 extends HttpServlet {
+public class BookServlet extends HttpServlet {
 
     private BookDAO bookDAO;
 
@@ -33,7 +32,7 @@ public class BookServlet1 extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null) {
-            response.sendRedirect(request.getContextPath() + "/BookList1.jsp");
+            response.sendRedirect(request.getContextPath() + "/BookList.jsp");
             return;
         }
 
@@ -82,7 +81,7 @@ public class BookServlet1 extends HttpServlet {
                 }
                 break;
             default:
-                response.sendRedirect(request.getContextPath() + "/BookList1.jsp");
+                response.sendRedirect(request.getContextPath() + "/BookList.jsp");
                 break;
         }
     }
@@ -117,7 +116,7 @@ public class BookServlet1 extends HttpServlet {
 
         List<Book> books = bookDAO.listAllBooks();
         request.setAttribute("books", books); // add the list of books to the request
-        request.getRequestDispatcher("/BookList1.jsp").forward(request, response);    }
+        request.getRequestDispatcher("/BookList.jsp").forward(request, response);    }
 
     private void removeBook(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("id");
@@ -137,7 +136,7 @@ public class BookServlet1 extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/BookList1.jsp").forward(request, response);
+        request.getRequestDispatcher("/BookList.jsp").forward(request, response);
 
     }
 
@@ -161,7 +160,7 @@ public class BookServlet1 extends HttpServlet {
 
         List<Book> books = bookDAO.listAllBooks();
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/BookList1.jsp").forward(request, response);    }
+        request.getRequestDispatcher("/BookList.jsp").forward(request, response);    }
 
     private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filterParam = request.getParameter("filter");
@@ -179,7 +178,7 @@ public class BookServlet1 extends HttpServlet {
         }
 
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/BookList1.jsp").forward(request, response);
+        request.getRequestDispatcher("/BookList.jsp").forward(request, response);
         System.out.println("Filter: " + filterParam);
         System.out.println("Value: " + value);
         if (books == null || books.isEmpty()) {
@@ -202,8 +201,8 @@ public class BookServlet1 extends HttpServlet {
         // Set the list of books as a request attribute
         request.setAttribute("books", books);
 
-        // Forward the request to the BookList1.jsp page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("BookList1.jsp");
+        // Forward the request to the BookList.jsp page
+        RequestDispatcher dispatcher = request.getRequestDispatcher("BookList.jsp");
         dispatcher.forward(request, response);
     }
 

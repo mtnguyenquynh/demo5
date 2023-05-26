@@ -1,7 +1,8 @@
-package com.example.demo5;
+package com.example.demo5.Servlet;
 
+import com.example.demo5.admin.Admin;
 import com.example.demo5.connection.ConnectionDB;
-import com.example.demo5.customer.CustomarDAO;
+import com.example.demo5.customer.CustomerDAO;
 import com.example.demo5.customer.Customer;
 import enumClass.CustomerColumn;
 import jakarta.servlet.RequestDispatcher;
@@ -23,11 +24,11 @@ import java.util.List;
 public class CustomerServlet extends  HttpServlet{
 
 
-        private CustomarDAO customarDAO;
+        private CustomerDAO customerDAO;
 
         public void init() {
             ConnectionDB connectionDB = new ConnectionDB();
-            customarDAO = new CustomarDAO(connectionDB);
+            customerDAO = new CustomerDAO(connectionDB);
         }
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,11 +59,22 @@ public class CustomerServlet extends  HttpServlet{
                     removeCustomer(request,response);
                     break;
 
+                case "updateCustomer":
+                    try {
+                        updateCustomer(request, response);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
                 default:
                     response.sendRedirect(request.getContextPath() + "/CustomerList1.jsp");
                     break;
             }
         }
+
+
 
     private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
             String id = request.getParameter("id");
@@ -84,13 +96,13 @@ public class CustomerServlet extends  HttpServlet{
             Customer customer = new Customer(id, password, firstName, lastName, dob, amount);
 
             try {
-                customarDAO.addCustomer(customer);
+                customerDAO.addCustomer(customer);
                 request.setAttribute("customerAdded", true); // set the success message attribute
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            List<Customer> customers = customarDAO.listAllCustomers();
+            List<Customer> customers = customerDAO.listAllCustomers();
             request.setAttribute("customers", customers); // add the list of books to the request
             request.getRequestDispatcher("/CustomerLogin.jsp").forward(request, response);    }
 
@@ -99,7 +111,7 @@ public class CustomerServlet extends  HttpServlet{
 
 
         try {
-            customarDAO.deleteCustomer(id);
+            customerDAO.deleteCustomer(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,7 +119,7 @@ public class CustomerServlet extends  HttpServlet{
         List<Customer> customers = new ArrayList<>();
 
         try {
-            customers = customarDAO.listAllCustomers();
+            customers = customerDAO.listAllCustomers();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +132,7 @@ public class CustomerServlet extends  HttpServlet{
             List<Customer> customers = null;
 
             try {
-                customers = customarDAO.listAllCustomers();
+                customers = customerDAO.listAllCustomers();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -142,7 +154,7 @@ public class CustomerServlet extends  HttpServlet{
 
         ArrayList<Customer> customers = new ArrayList<>();
 
-        customers = customarDAO.searchCustomer(filter, value);
+        customers = customerDAO.searchCustomer(filter, value);
 
         request.setAttribute("customers", customers);
         request.getRequestDispatcher("/CustomerList1.jsp").forward(request, response);
@@ -154,6 +166,25 @@ public class CustomerServlet extends  HttpServlet{
             System.out.println("Found " + customers.size() + " customers");
         }
         }
+    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException, ServletException, IOException {
+        String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String dobString = request.getParameter("dob");
+        Double amount = Double.valueOf(request.getParameter("amount"));
 
-    }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob = sdf.parse(dobString);
+
+        Customer customer = new Customer(id, password, firstName, lastName, dob, amount);
+
+        customerDAO.updateCustomer(customer);
+
+        List<Customer> customers = customerDAO.listAllCustomers();
+        request.setAttribute("customers", customers);
+        request.getRequestDispatcher("/CustomerUpdateAccount.jsp").forward(request, response);    }
+
+}
+
 

@@ -1,5 +1,6 @@
 package com.example.demo5.customer;
 
+import com.example.demo5.admin.Admin;
 import com.example.demo5.connection.ConnectionDB;
 import enumClass.CustomerColumn;
 
@@ -7,10 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomarDAO {
+public class CustomerDAO {
     private final ConnectionDB connectionDB;
 
-    public CustomarDAO(ConnectionDB connectionDB) {
+    public CustomerDAO(ConnectionDB connectionDB) {
         this.connectionDB = connectionDB;
     }
 
@@ -112,4 +113,54 @@ public class CustomarDAO {
 
         return customers;
     }
+    public Customer getCustomerById(String id) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE ID = ?";
+
+        connectionDB.connect();
+        PreparedStatement statement = connectionDB.getJdbcConnection().prepareStatement(sql);
+        statement.setString(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        Customer customer = null;
+        if (resultSet.next()) {
+            customer = new Customer();
+            customer.setID(resultSet.getString("ID"));
+            customer.setPassword(resultSet.getString("Password"));
+            customer.setFirstName(resultSet.getString("FirstName"));
+            customer.setLastName(resultSet.getString("Lastname"));
+            customer.setDOB(resultSet.getDate("DOB"));
+            customer.setAmountInAccount(resultSet.getDouble("AmountInAccount"));
+        }
+
+        resultSet.close();
+        return customer;
+    }
+
+    public boolean updateCustomer(Customer customer) throws SQLException {
+        String sql = "UPDATE customer SET ID =?, Password =?, FirstName =? , LastName = ?, DOB= ?, AmountInAccount=? WHERE ID = ?";
+        connectionDB.connect();
+        PreparedStatement statement = null;
+        boolean rowUpdated = false;
+
+        try {
+            statement = connectionDB.getJdbcConnection().prepareStatement(sql);
+            statement.setString(1, customer.getID());
+            statement.setString(2, customer.getPassword());
+            statement.setString(3, customer.getFirstName());
+            statement.setString(4, customer.getLastName());
+            statement.setDate(5, new java.sql.Date(customer.getDOB().getTime()));
+            statement.setString(6, customer.getID());
+            rowUpdated = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            connectionDB.disconnect();
+        }
+
+        return rowUpdated;
+    }
+
 }

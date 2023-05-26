@@ -1,21 +1,16 @@
+<%@ page import="com.example.demo5.connection.ConnectionDB" %>
+<%@ page import="com.example.demo5.admin.AdminDAO" %>
+<%@ page import="com.example.demo5.admin.Admin" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html
-        lang="en"
 >
 <head>
     <meta charset="utf-8" />
 
 
     <title>Admin Dashboard</title>
-
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -42,6 +37,20 @@
 </head>
 
 <body>
+<%
+    // Retrieve the book ID from the request parameter
+    String adminId = request.getParameter("id");
+
+    // Retrieve the current book's information from the database using the book ID
+    ConnectionDB connectionDB = new ConnectionDB();
+    AdminDAO adminDAO = new AdminDAO(connectionDB);
+    Admin admin;
+    try {
+        admin = adminDAO.getAdminById((String) session.getAttribute("adminId"));
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+%>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -94,7 +103,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">BOOK STORE</span></li>
                 <!-- Tables -->
                 <li class="menu-item">
-                    <a href="BookList1.jsp" class="menu-link">
+                    <a href="BookList.jsp" class="menu-link">
                         <div>📚 Library</div>
                     </a>
                 </li>
@@ -135,7 +144,7 @@
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-7">
                                         <div class="card-body">
-                                            <h5 class="card-title text-primary">Good morning [admin name]! 🎉</h5>
+                                            <h5 class="card-title text-primary">Good morning <%=admin.getFullName()%>! 🎉</h5>
                                             <p class="mb-4">
                                                 Update new book regularly for your book reader 🤗
                                             </p>
@@ -163,26 +172,10 @@
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
-                                                    <img src="assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt4"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
+                                                    🙎‍♂️
                                                 </div>
                                             </div>
-                                            <span class="d-block mb-1">Total Customers</span>
+                                            <span class="fw-semibold d-block mb-1">Total Customers</span>
                                             <h3 id="totalCustomer" class="card-title text-nowrap mb-2"></h3>
 
                                         </div>
@@ -193,23 +186,7 @@
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
-                                                    <img src="assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt1"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
+                                                    📘
                                                 </div>
                                             </div>
                                             <span class="fw-semibold d-block mb-1">Books in store</span>
@@ -247,29 +224,15 @@
 
 
 <!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
+
 <script src="assets/vendor/libs/jquery/jquery.js"></script>
-<script src="assets/vendor/libs/popper/popper.js"></script>
-<script src="assets/vendor/js/bootstrap.js"></script>
-<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
 <script src="assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
 
-<!-- Vendors JS -->
-<script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
-<!-- Page JS -->
-<script src="assets/js/dashboards-analytics.js"></script>
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- Add the script right before the closing </body> tag -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         // First AJAX call

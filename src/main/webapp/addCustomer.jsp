@@ -2,29 +2,23 @@
 <html>
 <head>
     <title>Add Customer</title>
-    <meta charset="utf-8" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
+    <meta charset="utf-8"/>
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet"  type="text/css" href="assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet"  type="text/css" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet"  type="text/css" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet"  type="text/css" href="assets/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" type="text/css" href="assets/vendor/css/theme-default.css"
+         />
+    <link rel="stylesheet" type="text/css" href="assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet"  type="text/css" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="assets/vendor/css/pages/page-auth.css" />
+    <link rel="stylesheet" href="assets/vendor/css/pages/page-auth.css"/>
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
 
@@ -96,7 +90,7 @@
                             <input
                                     type="date"
                                     id="dob"
-                                    name="dob"  required
+                                    name="dob" required
                                     class="form-control">
                         </div>
 
@@ -109,7 +103,9 @@
                                     class="form-control"></div>
 
                         <div class="mb-3">
-                            <button  class="btn btn-primary d-grid w-100" type="submit" name="action" value="add">Register</button>
+                            <button class="btn btn-primary d-grid w-100" type="submit" name="action" value="add">
+                                Register
+                            </button>
                         </div>
 
                     </form>

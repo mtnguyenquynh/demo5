@@ -1,4 +1,4 @@
-package com.example.demo5;
+package com.example.demo5.Servlet;
 
 import com.example.demo5.book.Book;
 import com.example.demo5.book.BookDAO;
@@ -77,9 +77,6 @@ public class OrderServlet extends HttpServlet {
                 case "viewBook":
                     viewBooks(request, response);
                     break;
-                case "makeOrder":
-                    makeOrder(request, response);
-                    break;
                 case "saveOrder":
                     saveOrder(request, response);
                 default:
@@ -89,17 +86,6 @@ public class OrderServlet extends HttpServlet {
             throw new ServletException(ex);
         }
     }
-
-    private void makeOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        // Retrieve all books from the database
-        List<Book> books = null;
-
-        books = bookDAO.listAllBooks();
-
-        // Set the books attribute and forward to the success.jsp page
-        request.setAttribute("books", books);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("success.jsp");
-        dispatcher.forward(request, response);    }
 
     private void saveOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         String[] bookIDs = request.getParameterValues("bookIDs");
@@ -168,10 +154,16 @@ public class OrderServlet extends HttpServlet {
         // Set the list of books as an attribute to the request or session
         request.setAttribute("booksInOrder", books);
 
-        // Forward the request to a JSP page to display the list of books
-        RequestDispatcher dispatcher = request.getRequestDispatcher("viewOrder.jsp");
-        dispatcher.forward(request, response);
+        System.out.println(customerId);
+
+        // Send the list of books as a JSON response
+        Gson gson = new Gson();
+        String json = gson.toJson(books);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
+
 
 
 

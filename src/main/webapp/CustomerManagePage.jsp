@@ -1,36 +1,28 @@
+<%@ page import="com.example.demo5.connection.ConnectionDB" %>
+<%@ page import="com.example.demo5.customer.Customer" %>
+<%@ page import="com.example.demo5.customer.CustomerDAO" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html
         lang="en"
 >
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 
 
     <title>Admin Dashboard</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
-    />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="assets/css/demo.css" />
+    <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="assets/css/demo.css"/>
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
@@ -41,6 +33,20 @@
 </head>
 
 <body>
+<%
+    // Retrieve the book ID from the request parameter
+    String customerId = request.getParameter("id");
+
+    // Retrieve the current book's information from the database using the book ID
+    ConnectionDB connectionDB = new ConnectionDB();
+    CustomerDAO customerDAO = new CustomerDAO(connectionDB);
+    Customer customer;
+    try {
+        customer = customerDAO.getCustomerById((String) session.getAttribute("customerId"));
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+%>
 
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -57,11 +63,11 @@
             </div>
 
 
-            <ul class="menu-inner py-1">
+            <ul class="menu-inner">
                 <!-- Dashboard -->
                 <li class="menu-item active">
                     <a href="CustomerManagePage.jsp" class="menu-link">
-                        <div>💼  Dashboard</div>
+                        <div>💼 Dashboard</div>
                     </a>
                 </li>
 
@@ -73,7 +79,7 @@
                 </li>
 
                 <li class="menu-item">
-                    <a  href="#" class="menu-link">
+                    <a href="CustomerUpdateAccount.jsp" class="menu-link">
                         <div>👨‍💼 Account Settings</div>
                     </a>
 
@@ -84,7 +90,7 @@
 
                 <li class="menu-item">
                     <a href="viewOrder.jsp" class="menu-link ">
-                        <div>📕 Your Book</div>
+                        <div>📕 My Books</div>
                     </a>
 
                 </li>
@@ -134,7 +140,8 @@
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-7">
                                         <div class="card-body">
-                                            <h5 class="card-title text-primary">Good morning [customer name]! 🎉</h5>
+                                            <h5 class="card-title text-primary">Good
+                                                morning <%=customer.getFirstName()%>! 🎉</h5>
                                             <p class="mb-4">
                                                 Discover your favourite now 🤗
                                             </p>
@@ -154,54 +161,10 @@
                         </div>
 
 
-
-                        <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                            <div class="row">
-                                <div class="col-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="card-title d-flex align-items-start justify-content-between">
-                                                <div class="avatar flex-shrink-0">
-                                                    <img src="assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button
-                                                            class="btn p-0"
-                                                            type="button"
-                                                            id="cardOpt4"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span class="d-block mb-1">Number of books</span>
-                                            <h3 id="totalCustomer" class="card-title text-nowrap mb-2"></h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- </div>
-                <div class="row"> -->
-                            </div>
-                        </div>
-
-
-
                     </div>
 
                 </div>
                 <!-- / Content -->
-
 
 
                 <div class="content-backdrop fade"></div>
@@ -217,47 +180,20 @@
 <!-- / Layout wrapper -->
 
 
-
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="assets/vendor/libs/jquery/jquery.js"></script>
-<script src="assets/vendor/libs/popper/popper.js"></script>
-<script src="assets/vendor/js/bootstrap.js"></script>
+
 <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
 <script src="assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
-<!-- Vendors JS -->
-<script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
-<!-- Page JS -->
-<script src="assets/js/dashboards-analytics.js"></script>
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 
-<!-- Add the script right before the closing </body> tag -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // First AJAX call
-        $.ajax({
-            type: 'POST',
-            url: 'bookServlet1',
-            data: { action: 'countTotalCustomer' },
-            success: function(data) {
-                $('#totalCustomer').html(data); // Update the element with the received value
-            },
-            error: function() {
-                console.log('Error fetching total customer count.');
-            }
-        });
-
-    });
-</script>
 </body>
 </html>

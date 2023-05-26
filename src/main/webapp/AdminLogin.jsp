@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Login Customer</title>
+    <title>Login Admin</title>
     <meta charset="utf-8"/>
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -11,11 +11,14 @@
     <!-- Core CSS -->
     <link rel="stylesheet" type="text/css" href="assets/vendor/css/core.css" class="template-customizer-core-css"/>
     <link rel="stylesheet" type="text/css" href="assets/vendor/css/theme-default.css"
-          class="template-customizer-theme-css"/>
+         />
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css"/>
 
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
 
-    <!-- CSS FOR LOGIN FORM -->
+    <!-- Page CSS -->
+    <!-- Page -->
     <link rel="stylesheet" href="assets/vendor/css/pages/page-auth.css"/>
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
@@ -38,18 +41,15 @@
                     <div class="app-brand justify-content-center">
                         <a href="index.html" class="app-brand-link gap-2">
 
-                            <span class="app-brand-text demo text-body fw-bolder">👨‍💼 Customer Login</span>
+                            <span class="app-brand-text demo text-body fw-bolder">👨‍💼 Admin Login</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <% if (request.getAttribute("customerAdded") != null) { %>
-                    <div class="alert alert-success">Customer added successfully!</div>
-                    <% } %>
 
-                    <h4 class="mb-2">Welcome customer! 👋</h4>
-                    <p class="mb-4">Sign-in to your account and start reading your favourite books</p>
+                    <h4 class="mb-2">Welcome admin! 👋</h4>
+                    <p class="mb-4">Please sign-in to your account and start managing the store</p>
 
-                    <form action="customerLoginServlet" method="POST">
+                    <form action="loginServlet" method="POST">
                         <div class="mb-3">
                             <label for="id" class="form-label">Username</label>
                             <input
@@ -77,19 +77,13 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <a href="addCustomer.jsp"> Sign Up </a>
-                        </div>
-                        <div class="mb-3">
                             <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- /Register -->
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

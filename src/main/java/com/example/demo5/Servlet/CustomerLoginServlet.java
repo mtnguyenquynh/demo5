@@ -1,4 +1,4 @@
-package com.example.demo5;
+package com.example.demo5.Servlet;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,10 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.example.demo5.connection.ConnectionDB;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"/loginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "CustomerLoginServlet", urlPatterns = {"/customerLoginServlet"})
+public class CustomerLoginServlet extends HttpServlet {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AdminLoginServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +33,17 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("Is authenticated: " + isAuthenticated); // print whether the user is authenticated
 
-        // If the user is authenticated, redirect to the AdminPage.jsp
+        // If the user is authenticated, store the customerId in the session and redirect to the CustomerManagePage.jsp
         if (isAuthenticated) {
-            response.sendRedirect(request.getContextPath() + "/AdminManagePage.jsp");        }
+            HttpSession session = request.getSession();
+            session.setAttribute("customerId", id);
+            response.sendRedirect(request.getContextPath() + "/CustomerManagePage.jsp");
+        }
+
         // If the user is not authenticated, set an error message
         else {
             request.setAttribute("errorMessage", "Invalid username or password");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerLogin.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -52,7 +56,7 @@ public class LoginServlet extends HttpServlet {
             connectionDB.connect();
 
             // Prepare a statement to execute the SQL query
-            String sql = "SELECT * FROM admin WHERE ID = ? AND Password = ?";
+            String sql = "SELECT * FROM customer WHERE ID = ? AND Password = ?";
             PreparedStatement stmt = connectionDB.getJdbcConnection().prepareStatement(sql);
             stmt.setString(1, id);
             stmt.setString(2, password);

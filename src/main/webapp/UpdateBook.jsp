@@ -9,12 +9,6 @@
     <meta charset="UTF-8">
     <title>Update Book</title>
     <meta charset="utf-8" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -25,11 +19,7 @@
     <link rel="stylesheet"  type="text/css" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet"  type="text/css" href="assets/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet"  type="text/css" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
 
-    <!-- Page CSS -->
-    <!-- Page -->
     <link rel="stylesheet" href="assets/vendor/css/pages/page-auth.css" />
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>

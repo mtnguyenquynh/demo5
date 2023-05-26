@@ -19,6 +19,10 @@ public class Customer {
         AmountInAccount = amountInAccount;
     }
 
+    public Customer() {
+
+    }
+
     public String getID() {
         return ID;
     }

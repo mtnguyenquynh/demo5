@@ -15,7 +15,8 @@
     <% List<BookOrderHistory> orderList = (List<BookOrderHistory>) request.getAttribute("orderList");
         for (BookOrderHistory order : orderList) { %>
     <tr>
-        <td><%= order.getOrderId() %></td>
+        <td><%= order.getOrderId() %>
+        </td>
         <td>
             <a href="orders?action=view&orderId=<%= order.getOrderId() %>">View Order</a>
         </td>

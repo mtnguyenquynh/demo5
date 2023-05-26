@@ -5,29 +5,7 @@
 <html>
 <head>
     <title>View Order</title>
-    <script>
-        window.addEventListener('load', function() {
-            // Check if form has already been submitted in this session
-            if (!sessionStorage.getItem('formSubmitted')) {
-                var form = document.createElement('form');
-                form.method = 'get';
-                form.action = 'orderServlet';
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'action';
-                input.value = 'view';
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
 
-                // Set session variable to indicate form has been submitted
-                sessionStorage.setItem('formSubmitted', 'false');
-            }
-        });
-    </script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link href="assets/css/main.css" rel="stylesheet" />
 
@@ -40,10 +18,6 @@
     <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="assets/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-    <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
@@ -69,7 +43,7 @@
             <!-- Layouts -->
             <ul class="menu-inner py-1">
 
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="CustomerManagePage.jsp" class="menu-link">
                         <div>💼 Dashboard</div>
                     </a>
@@ -81,7 +55,7 @@
                 </li>
 
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="CustomerUpdateAccount.jsp" class="menu-link">
                         <div>👨‍💼 Account Settings</div>
                     </a>
 
@@ -90,9 +64,9 @@
                 <!-- Components -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">LIBRARY</span></li>
 
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="viewOrder.jsp" class="menu-link ">
-                        <div>📕 Your Book</div>
+                        <div>📕 My Books</div>
                     </a>
 
                 </li>
@@ -142,7 +116,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Your Order / </span>Total Books </h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">My Books / </span>Total Books </h4>
                     <!-- Basic Bootstrap Table -->
                     <div class="card">
                         <div class="table-responsive text-nowrap">
@@ -159,7 +133,11 @@
         <th>Type</th>
     </tr>
     </thead>
-    <tbody>
+                            <tbody id = "bookTableBody"></tbody>
+
+                                <input type="hidden" name="customerId"
+                                       value="<%= session.getAttribute("customerId") %>"/>
+  <%-- <tbody>
     <% List<Book> books = (List<Book>) request.getAttribute("booksInOrder");
     if (books != null) {
     for (Book book : books) { %>
@@ -176,7 +154,7 @@
     </tr>
     <%  }
         } %>
-    </tbody>
+    </tbody> --%>
 </table>
 
                         </div>
@@ -218,9 +196,7 @@
 <!-- / Layout wrapper -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="assets/vendor/libs/jquery/jquery.js"></script>
-<script src="assets/vendor/libs/popper/popper.js"></script>
-<script src="assets/vendor/js/bootstrap.js"></script>
-<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
 
 <script src="assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
@@ -228,6 +204,60 @@
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="assets/js/main.js"></script></body>
+<script src="assets/js/main.js"></script>
+<script>
+    function fetchBookOrderList(){
+        var xhr =  new XMLHttpRequest();
+        xhr.open("GET", "orderServlet?action=view");
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var books = JSON.parse(xhr.responseText);
+                updateBookOrderTable(books);
+            }
+        };
+        xhr.send();
+    }
+
+    function updateBookOrderTable(books){
+        var tableBody = document.getElementById("bookTableBody");
+
+        tableBody.innerHTML = "";
+
+        for (var i = 0; i<books.length;i++){
+            var book = books[i];
+            var row = tableBody.insertRow(-1);
+
+            var idCell = row.insertCell(0);
+            idCell.innerHTML = book.ID;
+
+            var titleCell = row.insertCell(1);
+            titleCell.innerHTML = book.BookTitle;
+
+            var authorCell = row.insertCell(2);
+            authorCell.innerHTML = book.AuthorName;
+
+            var pubDateCell = row.insertCell(3);
+            pubDateCell.innerHTML = book.PublicationDate;
+
+            var versionCell = row.insertCell(4);
+            versionCell.innerHTML = book.Version;
+
+            var genreCell = row.insertCell(5);
+            genreCell.innerHTML = book.Genre;
+
+            var priceCell = row.insertCell(6);
+            priceCell.innerHTML = book.Price;
+
+            var typeCell = row.insertCell(7);
+            typeCell.innerHTML = book.Type;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchBookOrderList);
+</script>
+
+</body>
+
 </html>
 

@@ -3,9 +3,6 @@
 <html>
 <head>
     <title>Book List</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
     <link href="assets/css/main.css" rel="stylesheet"/>
 
@@ -17,11 +14,6 @@
     <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css"/>
     <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
     <link rel="stylesheet" href="assets/css/demo.css"/>
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-
-    <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="assets/vendor/js/helpers.js"></script>
@@ -46,7 +38,7 @@
             <!-- Layouts -->
             <ul class="menu-inner py-1">
 
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="CustomerManagePage.jsp" class="menu-link">
                         <div>💼 Dashboard</div>
                     </a>
@@ -69,7 +61,7 @@
 
                 <li class="menu-item">
                     <a href="viewOrder.jsp" class="menu-link ">
-                        <div>📕 Your Book</div>
+                        <div>📕 My Books</div>
                     </a>
 
                 </li>
@@ -77,7 +69,7 @@
                 <!-- Forms & Tables -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">BOOK STORE</span></li>
                 <!-- Tables -->
-                <li class="menu-item">
+                <li class="menu-item  active">
                     <a href="customerBookList.jsp" class="menu-link">
                         <div>📚 Library</div>
                     </a>
@@ -86,71 +78,70 @@
         </aside>
 
 
-    <div class="layout-page s003">
-        <nav
-                class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                id="layout-navbar"
-        >
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                    🟣
-                </a>
-            </div>
+        <div class="layout-page s003">
+            <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar"
+            >
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        🟣
+                    </a>
+                </div>
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
 
-            </div>
-        </nav>
+                </div>
+            </nav>
 
-        <div class="content-wrapper">
+            <div class="content-wrapper">
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Library /</span> Books in store</h4>
-                <div class="card">
-                    <div class="table-responsive text-nowrap">
-                        <form id="bookForm" action="orderServlet" method="POST">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Library /</span> Books in store</h4>
+                    <div class="card">
+                        <div class="table-responsive text-nowrap">
+                            <form id="bookForm" action="orderServlet" method="POST">
 
-                        <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Select</th>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Publication Date</th>
-                                    <th>Version</th>
-                                    <th>Genre</th>
-                                    <th>Price</th>
-                                    <th>Type</th>
-                                </tr>
-                                </thead>
-                                <tbody id="bookTableBody"></tbody>
+                                <table class="table">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Publication Date</th>
+                                        <th>Version</th>
+                                        <th>Genre</th>
+                                        <th>Price</th>
+                                        <th>Type</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="bookTableBody"></tbody>
                                     <input type="hidden" name="customerId"
                                            value="<%= session.getAttribute("customerId") %>"/>
                                     <input type="hidden" name="action" value="saveOrder"/>
-                                    <input type="submit" value="Submit Order"/>
+                                    <button class="btn btn-primary d-grid" type="submit">Submit Order</button>
 
 
-                            </table>
-                        </form>
+                                </table>
+                            </form>
 
 
+                        </div>
                     </div>
+
+                    <hr class="my-5"/>
+
+
                 </div>
 
-                <hr class="my-5" />
-
-
+                <div class="content-backdrop fade"></div>
 
 
             </div>
-
-            <div class="content-backdrop fade"></div>
-
-
         </div>
-    </div>
 
     </div>
 
@@ -167,9 +158,7 @@
 <!-- / Layout wrapper -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="assets/vendor/libs/jquery/jquery.js"></script>
-<script src="assets/vendor/libs/popper/popper.js"></script>
-<script src="assets/vendor/js/bootstrap.js"></script>
-<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
 
 <script src="assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
